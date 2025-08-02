@@ -1,14 +1,13 @@
 [project]
 name = "hexlet-code"
-version = "0.1.0"
+version = "0.1.1"
 description = "It's tool to compare two configuration files and show differences."
 authors = [
     { name = "vlrkors", email = "vlrkors@gmail.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-]
+dependencies = []
 
 [dependency-groups]
 dev = [
