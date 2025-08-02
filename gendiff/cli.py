@@ -1,21 +1,29 @@
 import argparse
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description='Compares two configuration files and shows a difference.'
-    )
-    
-    parser.add_argument('first_file', help='')
-    parser.add_argument('second_file', help='')
-    parser.add_argument(
-        '-f', '--format',
-        help='set format of output',
-        default='stylish'#!/usr/bin/env python3
-
-import argparse
 import json
 
+
+def read_file(filepath):
+    """
+    Читает файл и возвращает его содержимое.
+    Для этого проекта предполагаем, что файл всегда существует и читается успешно.
+    """
+    with open(filepath, 'r') as file:
+        return file.read()
+
+
+def parse_data(data_string, file_format):
+    """
+    Парсит строку данных в Python-словарь.
+    На данном этапе поддерживается только JSON.
+    """
+    # В будущем здесь можно добавить определение формата по расширению файла
+    # или содержимому, если file_format не предоставлен.
+    if file_format.upper() == 'JSON':
+        return json.loads(data_string)
+    # Здесь можно добавить поддержку других форматов (YAML и т.д.)
+    else:
+        # По умолчанию пробуем JSON
+        return json.loads(data_string)
 
 def read_file(filepath):
     """
