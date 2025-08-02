@@ -2,7 +2,7 @@ install:
 	uv sync
 
 install_project:
-uv pip install -e 
+	uv pip install -e 
 
 build: 
 	uv build
