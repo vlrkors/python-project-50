@@ -1,4 +1,22 @@
 install:
+    uv pip install -e .
+
+lint:
+    uv run ruff check gendiff
+    uv run ruff format --check gendiff
+
+format:
+    uv run ruff format gendiff
+
+test:
+    uv run pytest tests -v
+
+test-coverage:
+    uv run pytest --cov=gendiff --cov-report=xml tests
+
+.PHONY: install lint format test test-coverage
+
+install:
 	uv sync
 
 install_project:
@@ -18,14 +36,6 @@ package-uninstall:
 
 uninstall:
 	uv tool uninstall .
-	
-lint: format
-	uv run ruff check gendiff
-
-format:
-	uv run ruff format gendiff
 
 record:
 	asciinema rec gendiff.cast
-	
-	
