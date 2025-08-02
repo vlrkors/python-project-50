@@ -13,14 +13,14 @@ package-install:
 package-uninstall:
 	uv tool uninstall dist/*.whl
 
-install:
-	uv tool install .
-
 uninstall:
 	uv tool uninstall .
 	
-lint:
-	uv run ruff check hexlet_code
+lint: format
+	uv run ruff check gendiff
+
+format:
+	uv run ruff format gendiff
 
 record:
 	asciinema rec gendiff.cast

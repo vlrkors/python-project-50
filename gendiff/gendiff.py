@@ -2,17 +2,17 @@ import json
 
 
 def read_file(filepath):
-    with open(filepath, 'r') as file:
+    with open(filepath, "r") as file:
         return file.read()
 
 
 def parse_data(data_string, file_format="JSON"):
     """Парсим строку данных в словарь."""
-    if file_format.upper() == 'JSON':
+    if file_format.upper() == "JSON":
         return json.loads(data_string)
     # Здесь можно добавить поддержку других форматов
     else:
-        return json.loads(data_string) # По умолчанию пробуем JSON
+        return json.loads(data_string)  # По умолчанию пробуем JSON
 
 
 def build_diff_plain(data1, data2):
@@ -21,7 +21,7 @@ def build_diff_plain(data1, data2):
     Ключи выводятся в алфавитном порядке.
     """
     diff_lines = ["{"]
-    
+
     # Получаем все ключи из обоих словарей и сортируем их
     all_keys = sorted(set(data1.keys()).union(set(data2.keys())))
 
@@ -47,11 +47,11 @@ def build_diff_plain(data1, data2):
 def generate_diff(file_path1, file_path2):
     """
     Сравниваем два конфигурационных файла и возвращаем строку с различиями.
-    
+
     Args:
         file_path1 (str): Путь к первому файлу.
         file_path2 (str): Путь ко второму файлу.
-        
+
     Returns:
         str: Строка с различиями в формате stylish.
     """
@@ -65,5 +65,5 @@ def generate_diff(file_path1, file_path2):
 
     # Генерация различий
     diff_result = build_diff_plain(data1, data2)
-    
+
     return diff_result
