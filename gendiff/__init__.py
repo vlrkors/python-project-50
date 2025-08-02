@@ -1,4 +1,3 @@
-from .gendiff import main
 from gendiff.gendiff import generate_diff
 
 __all__ = ["main"]
