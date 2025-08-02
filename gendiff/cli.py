@@ -113,13 +113,9 @@ def main():
 
 if __name__ == '__main__':
     main()
-    )
+
     
     args = parser.parse_args()
     # Пока просто заглушка - логика сравнения - потом
     print(f"Comparing {args.first_file} and {args.second_file}")
     print(f"Format: {args.format}")
-
-
-if __name__ == '__main__':
-    main()
