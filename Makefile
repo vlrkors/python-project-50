@@ -37,3 +37,4 @@ package-uninstall:
 # Запись asciinema
 record:
     asciinema rec gendiff.cast
+    
