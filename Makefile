@@ -5,11 +5,10 @@ install:
 # Линтинг кода
 lint:
 	uv run ruff check gendiff
-	uv run ruff format --check gendiff
 
 # Форматирование кода
 format:
-    uv run ruff format gendiff
+	uv run ruff format --check gendiff
 
 # Запуск тестов
 test:
@@ -18,10 +17,6 @@ test:
 # Запуск тестов с измерением покрытия
 test-coverage:
     uv run pytest --cov=gendiff --cov-report=xml tests
-
-# Другие команды (например, установка зависимостей, если используется uv sync)
-# install_sync:
-# 	uv sync
 
 # Сборка пакета
 build:
@@ -39,13 +34,6 @@ package-install:
 package-uninstall:
     uv tool uninstall dist/*.whl
 
-# Удаление текущего проекта как инструмента (если он был установлен так)
-uninstall:
-    uv tool uninstall hexlet-code # Или как там называется ваш пакет/инструмент
-
 # Запись asciinema
 record:
     asciinema rec gendiff.cast
-
-# Объявление фиктивных целей
-.PHONY: install lint format test test-coverage build gendiff package-install package-uninstall uninstall record
