@@ -19,7 +19,7 @@ jobs:
         version: "latest"
 
     - name: Set up Python
-      run: uv python install 3.12 # Или ваша версия Python
+      run: uv python install 3.12
 
     - name: Install dependencies
       run: |
