@@ -1,40 +1,39 @@
-# Установка проекта в режиме разработки
+# Установка проекта в editable-режиме (разработка)
 install:
 	uv pip install -e .
 
-# Линтинг кода
+# Линтинг кода (ruff)
 lint:
 	uv run ruff check gendiff
 
-# Форматирование кода
+# Форматирование кода (ruff, только проверка)
 format:
 	uv run ruff format --check gendiff
 
 # Запуск тестов
 test:
-    uv run pytest tests -v
+	uv run pytest tests -v
 
 # Запуск тестов с измерением покрытия
 test-coverage:
-    uv run pytest --cov=gendiff --cov-report=xml tests
+	uv run pytest --cov=gendiff --cov-report=xml tests
 
-# Сборка пакета
+# Сборка wheel-пакета
 build:
-    uv build
+	uv build
 
 # Запуск CLI утилиты
 gendiff:
-    uv run gendiff
+	uv run gendiff
 
-# Установка собранного .whl пакета как инструмента
+# Установка wheel-пакета как инструмента (uv tool)
 package-install:
-    uv tool install dist/*.whl
+	uv tool install dist/*.whl
 
-# Удаление установленного .whl пакета как инструмента
+# Удаление wheel-пакета как инструмента (uv tool)
 package-uninstall:
-    uv tool uninstall dist/*.whl
+	uv tool uninstall dist/*.whl
 
-# Запись asciinema
+# Запись asciinema-сессии
 record:
-    asciinema rec gendiff.cast
-    
+	asciinema rec gendiff.cast
