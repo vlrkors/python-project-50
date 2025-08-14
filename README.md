@@ -1,5 +1,5 @@
 ### Hexlet tests and linter status:
-[![CI](https://github.com/yourname/python-project-50/actions/workflows/ci.yml/badge.svg)](https://github.com/yourname/python-project-50/actions)
+[![CI](https://github.com/yourname/python-project-50/actions/workflows/ci.yml/badge.svg)](https://github.com/vlrkors/python-project-50/actions)
 
 [![Hexlet Autocheck](https://github.com/vlrkors/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/vlrkors/python-project-50/actions/workflows/hexlet-check.yml)
 
