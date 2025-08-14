@@ -1,39 +1,53 @@
-# Установка проекта в editable-режиме (разработка)
-install:
-	uv pip install -e .
+.PHONY: lint test
 
-# Линтинг кода (ruff)
 lint:
-	uv run ruff check gendiff
+    uv run ruff check .
+    uv run black --check .
 
-# Форматирование кода (ruff, только проверка)
 format:
-	uv run ruff format --check gendiff
+    uv run ruff format .
+    uv run black .
 
-# Запуск тестов
 test:
-	uv run pytest tests -v
+    uv run pytest -v
 
-# Запуск тестов с измерением покрытия
-test-coverage:
-	uv run pytest --cov=gendiff --cov-report=xml tests
+# # Установка проекта в editable-режиме (разработка)
+# install:
+# 	uv pip install -e .
 
-# Сборка wheel-пакета
-build:
-	uv build
+# # Линтинг кода (ruff)
+# lint:
+# 	uv run ruff check gendiff
 
-# Запуск CLI утилиты
-gendiff:
-	uv run gendiff
+# # Форматирование кода (ruff, только проверка)
+# format:
+# 	uv run ruff format --check gendiff
 
-# Установка wheel-пакета как инструмента (uv tool)
-package-install:
-	uv tool install dist/*.whl
+# # Запуск тестов
+# test:
+# 	uv run pytest tests -v
 
-# Удаление wheel-пакета как инструмента (uv tool)
-package-uninstall:
-	uv tool uninstall dist/*.whl
+# # Запуск тестов с измерением покрытия
+# test-coverage:
+# 	uv run pytest --cov=gendiff --cov-report=xml tests
 
-# Запись asciinema-сессии
-record:
-	asciinema rec gendiff.cast
+# # Сборка wheel-пакета
+# build:
+# 	uv build
+
+# # Запуск CLI утилиты
+# gendiff:
+# 	uv run gendiff
+
+# # Установка wheel-пакета как инструмента (uv tool)
+# package-install:
+# 	uv tool install dist/*.whl
+
+# # Удаление wheel-пакета как инструмента (uv tool)
+# package-uninstall:
+# 	uv tool uninstall dist/*.whl
+
+# # Запись asciinema-сессии
+# record:
+# 	asciinema rec gendiff.cast
+
