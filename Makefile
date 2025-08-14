@@ -7,13 +7,13 @@ install:
 
 # Линтинг (ruff + проверка форматирования)
 lint:
-	uv run ruff check gendiff/ tests/
-	uv run black --check gendiff/ tests/
+	uv run ruff check gendiff
+	uv run black --check gendiff
 
 # Автоформатирование кода
 format:
-	uv run ruff format gendiff/ tests/
-	uv run black gendiff/ tests/
+	uv run ruff format gendiff
+	uv run black gendiff
 
 # Запуск тестов с подробным выводом
 test:

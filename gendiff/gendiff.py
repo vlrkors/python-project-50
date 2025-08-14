@@ -20,7 +20,7 @@ def build_diff_plain(data1, data2):
     Сравниваем два плоских словаря и возвращает строку с различиями.
     Ключи выводятся в алфавитном порядке.
     """
-     diff_lines = ["{"]
+    diff_lines = ["{"]
     all_keys = sorted(set(data1.keys()).union(set(data2.keys())))
     
     for key in all_keys:
