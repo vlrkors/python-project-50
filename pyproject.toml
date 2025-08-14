@@ -37,3 +37,11 @@ docstring-code-format = true
 line-length = 80
 target-version = ["py312"]
 
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "black",
+    "pytest-cov"
+]
+
