@@ -3,8 +3,7 @@
 
 <!-- [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=python-project-50&metric=coverage)](https://sonarcloud.io/project/overview?id=vlrkors_python-project-50) -->
 
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=Python-project-50&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Python-project-50)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Python-project-50)
+[![sonar-quality-gate](https://sonarcloud.io/api/project_badges/measure?project=vlrkors_python-project-50&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50)
 
 ## Проект: ВЫЧИСЛИТЕЛЬ ОТЛИЧИЙ
 
