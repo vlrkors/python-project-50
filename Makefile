@@ -1,40 +1,52 @@
-# Установка проекта в editable-режиме (разработка)
+# Makefile
+.PHONY: install lint format test test-coverage build clean gendiff package-install package-uninstall record
+
+# Установка в editable-режиме с dev-зависимостями
 install:
-	uv pip install -e .
+	uv pip install -e ".[dev]"
 
-# Линтинг кода (ruff)
+# Линтинг (ruff + проверка форматирования)
 lint:
-    uv run ruff check gendiff/ tests/
+	uv run ruff check gendiff/ tests/
+	uv run black --check gendiff/ tests/
 
-# Форматирование кода (ruff, только проверка)
+# Автоформатирование кода
 format:
-	uv run ruff format --check gendiff
+	uv run ruff format gendiff/ tests/
+	uv run black gendiff/ tests/
 
-# Запуск тестов
+# Запуск тестов с подробным выводом
 test:
-    uv run pytest tests/ -v
+	uv run pytest tests/ -v
 
-# Запуск тестов с измерением покрытия
+# Покрытие кода с генерацией отчета
 test-coverage:
-	uv run pytest --cov=gendiff --cov-report=xml tests
+	uv run pytest --cov=gendiff --cov-report=term-missing --cov-report=xml tests/
 
-# Сборка wheel-пакета
+# Сборка пакета (wheel и sdist)
 build:
-	uv build
+	uv run python -m build
 
-# Запуск CLI утилиты
+# Очистка артефактов
+clean:
+	rm -rf dist/
+	rm -rf build/
+	rm -rf *.egg-info
+	rm -rf .coverage coverage.xml
+	rm -rf .ruff_cache
+
+# Запуск CLI (пример с тестовыми файлами)
 gendiff:
-	uv run gendiff
+	uv run gendiff tests/fixtures/file1.json tests/fixtures/file2.json
 
-# Установка wheel-пакета как инструмента (uv tool)
-package-install:
+# Установка пакета через uv tool
+package-install: build
 	uv tool install dist/*.whl
 
-# Удаление wheel-пакета как инструмента (uv tool)
+# Удаление пакета
 package-uninstall:
-	uv tool uninstall dist/*.whl
+	uv tool uninstall hexlet-code || true
 
-# Запись asciinema-сессии
+# Запись демонстрации
 record:
-	asciinema rec gendiff.cast
-
+	asciinema rec recordings/gendiff.cast
