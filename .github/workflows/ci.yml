@@ -20,6 +20,14 @@ jobs:
     - name: Install uv
       run: pip install uv
     
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/pip
+          ~/.cache/uv
+        key: ${{ runner.os }}-deps-${{ hashFiles('**/pyproject.toml') }}
+    
     - name: Install dependencies
       run: |
         uv pip install -e ".[dev]"
@@ -42,6 +50,15 @@ jobs:
     
     - name: Install uv
       run: pip install uv
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: |
+          ~/.cache/pip
+          ~/.cache/uv
+        key: ${{ runner.os }}-deps-${{ hashFiles('**/pyproject.toml') }}
     
     - name: Install dependencies
       run: |
@@ -69,6 +86,14 @@ jobs:
       with:
         python-version: "3.12"
     
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/pip
+          ~/.cache/uv
+        key: ${{ runner.os }}-deps-${{ hashFiles('**/pyproject.toml') }}
+    
     - name: Install dependencies
       run: |
         uv pip install -e ".[dev]"
@@ -81,8 +106,8 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          -Dsonar.projectKey=YOUR_PROJECT_KEY
-          -Dsonar.organization=YOUR_ORG
+          -Dsonar.projectKey=python-project-50
+          -Dsonar.organization=vlrkors
           -Dsonar.python.coverage.reportPaths=coverage.xml
           -Dsonar.sources=gendiff
-          
+          -Dsonar.cpd.exclusions=**/tests/**
