@@ -20,26 +20,29 @@ def build_diff_plain(data1, data2):
     Сравниваем два плоских словаря и возвращает строку с различиями.
     Ключи выводятся в алфавитном порядке.
     """
-    diff_lines = ["{"]
-
-    # Получаем все ключи из обоих словарей и сортируем их
+     diff_lines = ["{"]
     all_keys = sorted(set(data1.keys()).union(set(data2.keys())))
-
+    
     for key in all_keys:
+        val1 = data1.get(key)
+        val2 = data2.get(key)
+        
+        # Приводим boolean к lowercase
+        if isinstance(val1, bool):
+            val1 = str(val1).lower()
+        if isinstance(val2, bool):
+            val2 = str(val2).lower()
+        
         if key not in data1:
-            # Ключ есть только во втором файле
-            diff_lines.append(f"  + {key}: {repr(data2[key])}")
+            diff_lines.append(f"  + {key}: {repr(val2).replace('True', 'true').replace('False', 'false')}")
         elif key not in data2:
-            # Ключ есть только в первом файле
-            diff_lines.append(f"  - {key}: {repr(data1[key])}")
-        elif data1[key] != data2[key]:
-            # Ключ есть в обоих, но значения различаются
-            diff_lines.append(f"  - {key}: {repr(data1[key])}")
-            diff_lines.append(f"  + {key}: {repr(data2[key])}")
+            diff_lines.append(f"  - {key}: {repr(val1).replace('True', 'true').replace('False', 'false')}")
+        elif val1 != val2:
+            diff_lines.append(f"  - {key}: {repr(val1).replace('True', 'true').replace('False', 'false')}")
+            diff_lines.append(f"  + {key}: {repr(val2).replace('True', 'true').replace('False', 'false')}")
         else:
-            # Ключ есть в обоих и значения совпадают
-            diff_lines.append(f"    {key}: {repr(data1[key])}")
-
+            diff_lines.append(f"    {key}: {repr(val1).replace('True', 'true').replace('False', 'false')}")
+    
     diff_lines.append("}")
     return "\n".join(diff_lines)
 
