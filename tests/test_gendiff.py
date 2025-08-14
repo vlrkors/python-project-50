@@ -6,7 +6,6 @@ from gendiff import generate_diff
 # Определяем путь к директории с фикстурами относительно местоположения этого файла тестов
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
-
 def get_fixture_path(filename: str) -> str:
     """Возвращает полный путь к файлу фикстуры."""
     return os.path.join(FIXTURES_PATH, filename)
