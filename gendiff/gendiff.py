@@ -22,27 +22,47 @@ def build_diff_plain(data1, data2):
     """
     diff_lines = ["{"]
     all_keys = sorted(set(data1.keys()).union(set(data2.keys())))
-    
+
     for key in all_keys:
         val1 = data1.get(key)
         val2 = data2.get(key)
-        
+
         # Приводим boolean к lowercase
         if isinstance(val1, bool):
             val1 = str(val1).lower()
         if isinstance(val2, bool):
             val2 = str(val2).lower()
-        
+
         if key not in data1:
-            diff_lines.append(f"  + {key}: {repr(val2).replace('True', 'true').replace('False', 'false')}")
+            diff_lines.append(
+                f"  + {key}: {
+                    repr(val2).replace('True', 'true').replace('False', 'false')
+                }"
+            )
         elif key not in data2:
-            diff_lines.append(f"  - {key}: {repr(val1).replace('True', 'true').replace('False', 'false')}")
+            diff_lines.append(
+                f"  - {key}: {
+                    repr(val1).replace('True', 'true').replace('False', 'false')
+                }"
+            )
         elif val1 != val2:
-            diff_lines.append(f"  - {key}: {repr(val1).replace('True', 'true').replace('False', 'false')}")
-            diff_lines.append(f"  + {key}: {repr(val2).replace('True', 'true').replace('False', 'false')}")
+            diff_lines.append(
+                f"  - {key}: {
+                    repr(val1).replace('True', 'true').replace('False', 'false')
+                }"
+            )
+            diff_lines.append(
+                f"  + {key}: {
+                    repr(val2).replace('True', 'true').replace('False', 'false')
+                }"
+            )
         else:
-            diff_lines.append(f"    {key}: {repr(val1).replace('True', 'true').replace('False', 'false')}")
-    
+            diff_lines.append(
+                f"    {key}: {
+                    repr(val1).replace('True', 'true').replace('False', 'false')
+                }"
+            )
+
     diff_lines.append("}")
     return "\n".join(diff_lines)
 
