@@ -1,7 +1,8 @@
 ### Hexlet tests and linter status:
+[![CI](https://github.com/yourname/python-project-50/actions/workflows/ci.yml/badge.svg)](https://github.com/yourname/python-project-50/actions)
 
 [![Hexlet Autocheck](https://github.com/vlrkors/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/vlrkors/python-project-50/actions/workflows/hexlet-check.yml)
-[![CI](https://github.com/yourname/python-project-50/actions/workflows/ci.yml/badge.svg)](https://github.com/yourname/python-project-50/actions)
+
 [![sonar-quality-gate](https://sonarcloud.io/api/project_badges/measure?project=vlrkors_python-project-50&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50)
 [![sonar-coverage](https://sonarcloud.io/api/project_badges/measure?project=vlrkors_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50)
 
