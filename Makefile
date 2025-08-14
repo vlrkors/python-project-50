@@ -5,6 +5,9 @@
 install:
 	uv pip install -e ".[dev]"
 
+build: 
+	uv build
+
 # Линтинг (ruff + проверка форматирования)
 lint:
 	uv run ruff check gendiff
@@ -23,14 +26,9 @@ test:
 test-coverage:
 	uv run pytest --cov=gendiff --cov-report=term-missing --cov-report=xml tests/
 
-# Сборка пакета (wheel и sdist)
-build:
-	uv run python -m build
-
 # Очистка артефактов
 clean:
 	rm -rf dist/
-	rm -rf build/
 	rm -rf *.egg-info
 	rm -rf .coverage coverage.xml
 	rm -rf .ruff_cache
@@ -40,7 +38,7 @@ gendiff:
 	uv run gendiff tests/fixtures/file1.json tests/fixtures/file2.json
 
 # Установка пакета через uv tool
-package-install: build
+package-install:
 	uv tool install dist/*.whl
 
 # Удаление пакета
