@@ -36,24 +36,28 @@ def build_diff_plain(data1, data2):
         if key not in data1:
             diff_lines.append(
                 f"  + {key}: {
-                    repr(val2).replace('True', 'true').replace('False', 'false')
+                    repr(val2).replace('True', 
+                                       'true').replace('False', 'false')
                 }"
             )
         elif key not in data2:
             diff_lines.append(
                 f"  - {key}: {
-                    repr(val1).replace('True', 'true').replace('False', 'false')
+                    repr(val1).replace('True', 
+                                       'true').replace('False', 'false')
                 }"
             )
         elif val1 != val2:
             diff_lines.append(
                 f"  - {key}: {
-                    repr(val1).replace('True', 'true').replace('False', 'false')
+                    repr(val1).replace('True', 
+                                       'true').replace('False', 'false')
                 }"
             )
             diff_lines.append(
                 f"  + {key}: {
-                    repr(val2).replace('True', 'true').replace('False', 'false')
+                    repr(val2).replace('True', 
+                                       'true').replace('False', 'false')
                 }"
             )
         else:
