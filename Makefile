@@ -1,9 +1,8 @@
 # Makefile
 .PHONY: install lint format test test-coverage build clean gendiff package-install package-uninstall record
 
-# Установка в editable-режиме с dev-зависимостями
 install:
-	uv pip install -e ".[dev]"
+	uv sync
 
 build: 
 	uv build
@@ -20,11 +19,11 @@ format:
 
 # Запуск тестов с подробным выводом
 test:
-	uv run pytest tests/ -v
+	uv run pytest -v
 
 # Покрытие кода с генерацией отчета
 test-coverage:
-	uv run pytest --cov=gendiff --cov-report=term-missing --cov-report=xml tests/
+	uv run pytest --cov=hexlet_python_package --cov-report xml
 
 # Очистка артефактов
 clean:
@@ -32,6 +31,9 @@ clean:
 	rm -rf *.egg-info
 	rm -rf .coverage coverage.xml
 	rm -rf .ruff_cache
+
+
+check: test lint
 
 # Запуск CLI (пример с тестовыми файлами)
 gendiff:
