@@ -1,8 +1,8 @@
 """Тесты для модуля gendiff."""
 
 import os
-
 from gendiff import generate_diff
+
 
 
 # Определяем путь к директории с фикстурами относительно
