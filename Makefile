@@ -3,7 +3,8 @@
 
 # Установка для разработки (с тестами и линтерами)
 install:
-	uv pip install -e ".[dev]"
+	uv pip install --system -e ".[dev]"
+# uv pip install -e ".[dev]"
 
 build: 
 	uv build
