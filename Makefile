@@ -25,7 +25,7 @@ test:
 
 # Покрытие кода с генерацией отчета
 test-coverage:
-	uv run pytest --cov=hexlet_python_package --cov-report xml
+	uv run pytest --cov=python-project-50 --cov-report xml
 
 # Очистка артефактов
 clean:
