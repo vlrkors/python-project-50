@@ -27,10 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Используем uv вместо pip (быстрее)
-          uv pip install -e ".[dev]"
-          # Если make install использует pip — замени на uv
-          # make install
+          uv pip install --system -e ".[dev]"
 
       - name: Run linter and pytest
         run: |
