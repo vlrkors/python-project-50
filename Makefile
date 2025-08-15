@@ -1,8 +1,9 @@
 # Makefile
-.PHONY: install lint format test test-coverage build clean gendiff package-install package-uninstall record
+.PHONY: install pytest lint format test test-coverage build clean gendiff package-install package-uninstall record
 
+# Установка для разработки (с тестами и линтерами)
 install:
-	uv sync
+	uv pip install -e ".[dev]"
 
 build: 
 	uv build
