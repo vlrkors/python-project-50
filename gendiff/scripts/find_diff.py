@@ -52,3 +52,42 @@ def find_diff(data1, data2):
     sorted_diff = sorted(diff, key=lambda x: x["name"])
 
     return sorted_diff
+
+
+def build_diff(dict1, dict2):
+    """Build internal representation of difference
+
+    between two dictionaries."""
+    diff = {}
+
+    all_keys = set(dict1.keys()) | set(dict2.keys())
+
+    for key in sorted(all_keys):
+        if key not in dict1:
+            diff[key] = {"type": "added", "value": dict2[key]}
+        elif key not in dict2:
+            diff[key] = {"type": "removed", "value": dict1[key]}
+        elif dict1[key] == dict2[key]:
+            if isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+                diff[key] = {
+                    "type": "nested",
+                    "children": build_diff(dict1[key], dict2[key]),
+                }
+            else:
+                diff[key] = {"type": "unchanged", "value": dict1[key]}
+        else:
+            # Если оба значения - словари, создаем вложенную структуру
+            if isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+                diff[key] = {
+                    "type": "nested",
+                    "children": build_diff(dict1[key], dict2[key]),
+                }
+            else:
+                # Иначе это изменение значения
+                diff[key] = {
+                    "type": "changed",
+                    "old_value": dict1[key],
+                    "new_value": dict2[key],
+                }
+
+    return diff
