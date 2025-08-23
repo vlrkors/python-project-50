@@ -16,9 +16,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493
 
       - name: Hexlet project check
-        uses: hexlet/project-action@release
+        uses: hexlet/project-action@d23c9b77423ebcdef1a90f8b5f97ebffbb8a83c9
         with:
           hexlet-id: ${{ secrets.HEXLET_ID }}
