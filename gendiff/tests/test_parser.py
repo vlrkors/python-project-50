@@ -22,7 +22,7 @@ def test_read_file_not_found(tmp_path: Path):
 
 
 def test_parse_data_json(tmp_path: Path):
-    content = "{""a"": 1, ""b"": true}"
+    content = "{a: 1, b: true}"
     path = tmp_path / "data.json"
     path.write_text(content, encoding="utf-8")
     data = p.parse_data_from_file(str(path))
@@ -45,4 +45,3 @@ def test_parse_data_yaml(tmp_path: Path):
 def test_parse_data_unsupported():
     with pytest.raises(ValueError):
         p.parse_data("a=b", "ini")
-

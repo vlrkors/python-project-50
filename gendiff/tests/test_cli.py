@@ -22,10 +22,12 @@ def test_cli_main_stdout(tmp_path: Path, capsys):
         sys.argv = argv_backup
 
     captured = capsys.readouterr()
-    assert captured.out == """{
+    assert (
+        captured.out
+        == """{
     a: 1
   - b: 2
   + c: 3
 }
 """
-
+    )

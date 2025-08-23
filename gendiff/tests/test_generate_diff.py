@@ -16,12 +16,15 @@ def test_generate_diff_stylish_json(tmp_path: Path):
     file2.write_text('{"k1": 2, "k3": null}', encoding="utf-8")
 
     out = generate_diff(str(file1), str(file2), formatter="stylish")
-    assert out == """{
+    assert (
+        out
+        == """{
   - k1: 1
   + k1: 2
   - k2: true
   + k3: null
 }"""
+    )
 
 
 def test_generate_diff_stylish_yaml(tmp_path: Path):
@@ -31,12 +34,15 @@ def test_generate_diff_stylish_yaml(tmp_path: Path):
     file2.write_text("k1: 2\nk3: null\n", encoding="utf-8")
 
     out = generate_diff(str(file1), str(file2), formatter="stylish")
-    assert out == """{
+    assert (
+        out
+        == """{
   - k1: 1
   + k1: 2
   - k2: true
   + k3: null
 }"""
+    )
 
 
 def test_generate_diff_unsupported_formatter(tmp_path: Path):
@@ -47,4 +53,3 @@ def test_generate_diff_unsupported_formatter(tmp_path: Path):
 
     with pytest.raises(ValueError):
         generate_diff(str(file1), str(file2), formatter="unknown")
-

@@ -44,4 +44,3 @@ def test_find_diff_flat_and_nested():
     ]
 
     assert diff == expected
-
