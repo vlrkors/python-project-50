@@ -1,10 +1,11 @@
-from gendiff import generate_diff
+from gendiff.scripts.generate_diff import generate_diff
 
-TESTS_DIR = 'tests/fixtures'
+TESTS_DIR = "gendiff/tests/test_data"
+
 
 def test_generate_diff_yaml():
-    file1 = f'{TESTS_DIR}/file1.yml'
-    file2 = f'{TESTS_DIR}/file2.yml'
+    file1 = f"{TESTS_DIR}/file1.yml"
+    file2 = f"{TESTS_DIR}/file2.yml"
     expected = """{
   - follow: false
     host: hexlet.io

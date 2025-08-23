@@ -2,7 +2,7 @@
 
 import argparse
 
-from gendiff.gendiff import generate_diff
+from gendiff.scripts.generate_diff import generate_diff
 
 
 def main():
@@ -20,7 +20,7 @@ def main():
     args = parser.parse_args()
 
     # Вызов основной функции сравнения
-    diff = generate_diff(args.first_file, args.second_file)
+    diff = generate_diff(args.first_file, args.second_file, args.format)
     print(diff)
 
 

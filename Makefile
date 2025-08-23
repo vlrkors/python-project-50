@@ -1,10 +1,16 @@
 # Makefile
 .PHONY: install pytest lint format test test-coverage build clean gendiff package-install package-uninstall record
 
-# Установка для разработки (с тестами и линтерами)
-install:
-	uv pip install --system -e ".[dev]"
-# uv pip install -e ".[dev]"
+VENV := .venv
+PY := $(VENV)/bin/python
+PIP := $(VENV)/bin/pip
+UVPIP := uv pip
+
+$(VENV):
+	uv venv $(VENV)
+
+install: $(VENV)
+	. $(VENV)/bin/activate && $(UVPIP) install -e ".[dev]"
 
 build: 
 	uv build
@@ -39,7 +45,7 @@ check: test lint
 
 # Запуск CLI (пример с тестовыми файлами)
 gendiff:
-	uv run gendiff tests/fixtures/file1.json tests/fixtures/file2.json
+	uv run gendiff gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
 
 # Установка пакета через uv tool
 package-install:
