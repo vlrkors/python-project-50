@@ -13,9 +13,17 @@ def read_file(file_path):
 
 
 def parse_data(data, format):
-    if format.lower() == "json":
-        return json.loads(data)
-    if format.lower() == "yaml" or format.lower() == "yml":
+    fmt = format.lower()
+    if fmt == "json":
+        try:
+            return json.loads(data)
+        except json.JSONDecodeError:
+            # Допуск: вход может быть «нестрогим JSON» (например, ключи без кавычек).
+            # В таком случае пробуем распарсить как YAML, который совместим с JSON.
+            import yaml  # импорт по требованию
+
+            return yaml.safe_load(data)
+    if fmt in ("yaml", "yml"):
         import yaml  # импортируем по требованию
 
         return yaml.safe_load(data)
