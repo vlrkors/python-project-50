@@ -1,54 +1,94 @@
-### Hexlet tests and linter status:
-[![CI](https://github.com/yourname/python-project-50/actions/workflows/ci.yml/badge.svg)](https://github.com/vlrkors/python-project-50/actions)
-
+### Статус
+[![CI](https://github.com/vlrkors/python-project-50/actions/workflows/ci.yml/badge.svg)](https://github.com/vlrkors/python-project-50/actions)
 [![Hexlet Autocheck](https://github.com/vlrkors/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/vlrkors/python-project-50/actions/workflows/hexlet-check.yml)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/quality_gate?project=vlrkors_python-project-50)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=vlrkors_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50)
 
-<!-- [![sonar-quality-gate](https://sonarcloud.io/api/project_badges/measure?project=vlrkors_python-project-50&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50) -->
+## Генератор различий (gendiff)
 
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=vlrkors_python-project-50)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50)
+CLI‑утилита и библиотека для сравнения двух конфигурационных файлов и вывода различий в удобочитаемом виде.
 
-[![sonar-coverage](https://sonarcloud.io/api/project_badges/measure?project=vlrkors_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50)
+Поддерживаемые форматы входных данных: JSON и YAML/YML. Формат вывода по умолчанию — `stylish`.
 
-## Проект: ВЫЧИСЛИТЕЛЬ ОТЛИЧИЙ
+### Требования
+- Python 3.12+
+- Рекомендуется менеджер `uv` (или используйте системный `pip`/`venv`).
 
-Gendiff позволяет сравнивать два JSON-файла (и в будущем другие форматы) и показывать различия между ними в читаемом формате. Инструмент можно использовать как из командной строки, так и как библиотеку в Python-скриптах.
+### Установка
 
-### Сборка и тестирование
+Установить в режиме разработки из исходников:
+```bash
+uv pip install -e '.[dev]'
+# либо
+python -m venv .venv && . .venv/bin/activate
+pip install -e '.[dev]'
+```
 
-**Соберите пакет:**
-    ```bash
-    uv build
-    ```
-**Установите пакет в режиме разработки (если еще не установлено):**
-    ```bash
-    uv pip install -e .
-    ```
-**Тест CLI**
-    ```bash
-    uv run gendiff data/file1.json data/file2.json
-    ```
-    Должно вывести:
-    ```
-    {
-        follow: false
-        host: 'hexlet.io'
-      - proxy: '123.234.53.22'
-      - timeout: 50
-      + timeout: 20
-      + verbose: true
+Сборка wheel‑пакета:
+```bash
+uv build
+```
+
+### Использование (CLI)
+
+```bash
+gendiff <первый_файл> <второй_файл> [--format stylish]
+```
+
+Пример:
+```bash
+gendiff gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
+```
+
+Пример вывода (`stylish`):
+```
+{
+  - a: 1
+  + a: 2
+    b: {
+        x: 1
+      - y: 2
+      + z: 3
     }
-    ```
-**Тест библиотеки**
-    Создайте тестовый файл: test_lib.py, а в нем:
-    ```
-    from gendiff import generate_diff
+  - c: true
+  - d: null
+  + e: str
+}
+```
 
-    diff = generate_diff('data/file1.json', 'data/file2.json')
-    print(diff)
-    ```
-    Запустите его:
-    ```bash
-    uv run python test_lib.py
-    ```
+Подсказка по параметрам:
+```bash
+gendiff --help
+```
 
-    Результат должен быть таким же, как и при вызове CLI.
+### Использование как библиотеки
+
+```python
+from gendiff import generate_diff
+
+print(generate_diff('file1.json', 'file2.json', formatter='stylish'))
+```
+
+### Разработка
+
+Команды с `make`:
+- `make install` — создание виртуального окружения и установка зависимостей.
+- `make test` — запуск тестов.
+- `make test-coverage` — тесты с покрытием, отчёт `coverage.xml`.
+- `make lint` — проверка стиля (ruff, black --check).
+- `make format` — автоформатирование (ruff format, black).
+
+Те же действия напрямую через `uv`:
+```bash
+uv run pytest -v
+uv run pytest --cov=gendiff --cov-report=term-missing --cov-report xml
+uv run ruff check gendiff
+uv run ruff format gendiff && uv run black gendiff
+```
+
+### Детали реализации
+- Парсинг: строгий JSON; при ошибке парсинга JSON допускается резервный разбор как YAML для «нестрогих» входов (например, ключи без кавычек).
+- Вывод `stylish`: древовидный вид с пометками добавленных/удалённых/изменённых/неизменённых значений.
+
+### Планы
+- Расширение поддерживаемых форматов вывода (plain, json).
