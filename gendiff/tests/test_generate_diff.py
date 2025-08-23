@@ -53,3 +53,54 @@ def test_generate_diff_unsupported_formatter(tmp_path: Path):
 
     with pytest.raises(ValueError):
         generate_diff(str(file1), str(file2), formatter="unknown")
+
+
+def test_generate_diff_empty_files_stylish(tmp_path: Path):
+    """Пустые JSON-файлы дают пустой стильный вывод."""
+    file1 = tmp_path / "empty1.json"
+    file2 = tmp_path / "empty2.json"
+    file1.write_text("{}", encoding="utf-8")
+    file2.write_text("{}", encoding="utf-8")
+
+    out = generate_diff(str(file1), str(file2), formatter="stylish")
+    assert (
+        out
+        == """{
+}"""
+    )
+
+
+def test_generate_diff_nested_and_mixed_types_stylish(tmp_path: Path):
+    """Проверка вложенных структур и разных типов
+
+    (числа, bool, null, строки)."""
+    file1 = tmp_path / "n1.json"
+    file2 = tmp_path / "n2.json"
+
+    # В первом файле присутствуют: число, вложенный dict, bool, null
+    file1.write_text(
+        '{"a": 1, "b": {"x": 1, "y": 2}, "c": true, "d": null}',
+        encoding="utf-8",
+    )
+    # Во втором: изменённое число, изменён вложенный dict, добавлена строка
+    file2.write_text(
+        '{"a": 2, "b": {"x": 1, "z": 3}, "e": "str"}',
+        encoding="utf-8",
+    )
+
+    out = generate_diff(str(file1), str(file2), formatter="stylish")
+    assert (
+        out
+        == """{
+  - a: 1
+  + a: 2
+    b: {
+        x: 1
+      - y: 2
+      + z: 3
+    }
+  - c: true
+  - d: null
+  + e: str
+}"""
+    )

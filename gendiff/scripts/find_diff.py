@@ -55,9 +55,7 @@ def find_diff(data1, data2):
 
 
 def build_diff(dict1, dict2):
-    """Build internal representation of difference
-
-    between two dictionaries."""
+    """Build internal representation of difference between two dictionaries."""
     diff = {}
 
     all_keys = set(dict1.keys()) | set(dict2.keys())

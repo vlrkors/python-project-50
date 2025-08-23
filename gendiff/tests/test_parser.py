@@ -45,3 +45,41 @@ def test_parse_data_yaml(tmp_path: Path):
 def test_parse_data_unsupported():
     with pytest.raises(ValueError):
         p.parse_data("a=b", "ini")
+
+
+def test_read_file_returns_exact_content(tmp_path: Path):
+    """read_file возвращает содержимое без изменений (UTF-8)."""
+    content = "строка с юникодом ✓ and ascii"
+    path = tmp_path / "text.txt"
+    path.write_text(content, encoding="utf-8")
+    assert p.read_file(str(path)) == content
+
+
+def test_get_file_format_from_complex_name():
+    """Формат определяется по последнему суффиксу после точки."""
+    assert p.get_file_format("backup.data.config.json") == "json"
+
+
+def test_parse_data_from_file_uppercase_json_extension(tmp_path: Path):
+    """Парсинг JSON работает при верхнем регистре расширения."""
+    path = tmp_path / "DATA.JSON"
+    path.write_text('{"a": 1, "b": true}', encoding="utf-8")
+    assert p.parse_data_from_file(str(path)) == {"a": 1, "b": True}
+
+
+def test_parse_data_from_file_uppercase_yaml_extension(tmp_path: Path):
+    """Парсинг YAML работает при верхнем регистре расширения."""
+    try:
+        import yaml  # noqa: F401
+    except ModuleNotFoundError:
+        pytest.skip("PyYAML не установлен")
+
+    path = tmp_path / "DATA.YML"
+    path.write_text("a: 1\nb: false\n", encoding="utf-8")
+    assert p.parse_data_from_file(str(path)) == {"a": 1, "b": False}
+
+
+def test_parse_data_json_fallback_to_yaml_for_unquoted_keys():
+    """Для формата 'json' допускаем YAML-парсинг при нестрогом JSON."""
+    data = "{a: 1, b: true}"
+    assert p.parse_data(data, "json") == {"a": 1, "b": True}

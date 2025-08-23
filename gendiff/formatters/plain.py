@@ -11,40 +11,36 @@ def format_value(value):
         return str(value)
 
 
-def make_plain_item(item, path=""):
-    key = item.get("name")
-    action = item.get("action")
-    new_value = format_value(item.get("new_value"))
-    old_value = format_value(item.get("old_value"))
-    current_path = f"{path}.{key}" if path else key
+def format_plain(diff, parent_key: str = "") -> str:
+    """Format difference as plain string."""
+    lines: list[str] = []
 
-    ADD = " was added with value: "
-    REMOVE = " was removed"
-    UPD = " was updated. From "
-    UPD2 = " to "
-    PROP = "Property "
+    for key, node in diff.items():
+        current_key = f"{parent_key}.{key}" if parent_key else key
+        node_type = node["type"]
 
-    if action == "added":
-        return f"{PROP}'{current_path}'{ADD}{new_value}"
-    if action == "deleted":
-        return f"{PROP}'{current_path}'{REMOVE}"
-    if action == "modified":
-        return f"{PROP}'{current_path}'{UPD}{old_value}{UPD2}{new_value}"
-    if action == "nested":
-        children = item.get("children")
-        return make_plain_diff(children, current_path)
-    return None
+        if node_type == "added":
+            value = format_value(node["value"])
+            lines.append(
+                f"Property '{current_key}' was added with value: {value}"
+            )
+        elif node_type == "removed":
+            lines.append(f"Property '{current_key}' was removed")
+        elif node_type == "changed":
+            old_value = format_value(node["old_value"])
+            new_value = format_value(node["new_value"])
+            lines.append(
+                f"Property '{current_key}' was updated. "
+                f"From {old_value} to {new_value}"
+            )
+        elif node_type == "nested":
+            nested = format_plain(node["children"], current_key)
+            if nested:
+                lines.extend(nested.split("\n"))
+        # Для unchanged ничего не выводим в plain формате
 
-
-def make_plain_diff(diff, path=""):
-    result = []
-    for item in diff:
-        formatted_item = make_plain_item(item, path)
-        if formatted_item is not None:
-            result.append(formatted_item)
-
-    return "\n".join(result)
+    return "\n".join(lines)
 
 
-def format_diff_plain(diff):
-    return make_plain_diff(diff)
+def format_diff_plain(diff) -> str:
+    return format_plain(diff)
