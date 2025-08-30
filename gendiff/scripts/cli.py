@@ -17,7 +17,7 @@ def main():
         "-f",
         "--format",
         default="stylish",
-        choices=["stylish", "plain"],
+        choices=["stylish", "plain", "json"],
         help="Output format (default: stylish)",
     )
 

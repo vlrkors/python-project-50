@@ -45,7 +45,8 @@ check: test lint
 
 # Запуск CLI (пример с тестовыми файлами)
 gendiff:
-	uv run gendiff --format plain gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
+	uv run gendiff --format json gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
+#	uv run gendiff --format plain gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
 # 	uv run gendiff gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
 
 # Установка пакета через uv tool
