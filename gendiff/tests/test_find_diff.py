@@ -1,7 +1,5 @@
 """Тесты для модуля find_diff."""
 
-from __future__ import annotations
-
 from gendiff.scripts.find_diff import find_diff
 
 
