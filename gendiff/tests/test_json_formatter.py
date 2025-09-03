@@ -1,7 +1,5 @@
 """Тесты для JSON-форматтера."""
 
-from __future__ import annotations
-
 import json
 
 from gendiff.formatters.json_formatter import format_diff_json
