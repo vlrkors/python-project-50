@@ -1,6 +1,6 @@
+from gendiff.formatters.json_formatter import format_diff_json
 from gendiff.formatters.plain import format_plain
 from gendiff.formatters.stylish import format_stylish
-from gendiff.formatters.json_formatter import format_diff_json
 from gendiff.scripts.find_diff import build_diff
 from gendiff.scripts.parser import parse_data_from_file
 
