@@ -1,5 +1,7 @@
 """Тесты для диспетчера форматтеров format_identifier."""
 
+import pytest
+
 from gendiff.formatters.format_identifier import format_identifier
 from gendiff.formatters.plain import format_diff_plain
 from gendiff.formatters.stylish import format_stylish
@@ -32,4 +34,3 @@ def test_format_identifier_unknown():
     diff = _sample_diff()
     with pytest.raises(ValueError):
         format_identifier(diff, "unknown")
-
