@@ -91,4 +91,4 @@ uv run ruff format gendiff && uv run black gendiff
 - Вывод `stylish`: древовидный вид с пометками добавленных/удалённых/изменённых/неизменённых значений.
 
 ### Запись работы
-- gendiff/recordings/gendiff.cast
+- gendiff/recordings/gendiff_stage**.cast, где ** - номер стадии проекта
