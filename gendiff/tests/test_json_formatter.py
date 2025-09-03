@@ -26,4 +26,3 @@ def test_format_diff_json_is_pretty_indented():
 
     assert "\n" in out
     assert "    " in out  # 4 пробела
-

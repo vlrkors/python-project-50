@@ -3,9 +3,9 @@
 import pytest
 
 from gendiff.formatters.format_identifier import format_identifier
+from gendiff.formatters.json_formatter import format_diff_json
 from gendiff.formatters.plain import format_diff_plain
 from gendiff.formatters.stylish import format_stylish
-from gendiff.formatters.json_formatter import format_diff_json
 from gendiff.scripts.find_diff import build_diff
 
 
