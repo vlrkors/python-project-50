@@ -1,28 +1,21 @@
-### Статус
+### Вычислитель отличий (gendiff)
 [![CI](https://github.com/vlrkors/python-project-50/actions/workflows/ci.yml/badge.svg)](https://github.com/vlrkors/python-project-50/actions)
 [![Hexlet Autocheck](https://github.com/vlrkors/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/vlrkors/python-project-50/actions/workflows/hexlet-check.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/quality_gate?project=vlrkors_python-project-50)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=vlrkors_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=vlrkors_python-project-50)
 
-## Генератор различий (gendiff)
-
-CLI‑утилита и библиотека для сравнения двух конфигурационных файлов и вывода различий в удобочитаемом виде.
-
-Поддерживаемые форматы входных данных: JSON и YAML/YML. Формат вывода по умолчанию — `stylish`.
+CLI‑утилита для сравнения двух файлов конфигурации и отображения различий. Поддерживаются форматы входных данных JSON и YAML/YML. Результат можно вывести в одном из трех форматов: `stylish` (по умолчанию), `plain`, `json`.
 
 ### Требования
 - Python 3.12+
-- Рекомендуется менеджер `uv` (или используйте системный `pip`/`venv`).
+- Утилита `uv` (рекомендуется для изоляции и установки); при желании можно использовать стандартные `venv`/`pip`.
 
 ### Установка
 
-Установить в режиме разработки из исходников:
+Установить проект в editable‑режиме с dev‑зависимостями:
 ```bash
 uv pip install -e '.[dev]'
-# либо
-python -m venv .venv && . .venv/bin/activate
-pip install -e '.[dev]'
-```
+
 
 Сборка wheel‑пакета:
 ```bash
@@ -32,7 +25,7 @@ uv build
 ### Использование (CLI)
 
 ```bash
-gendiff <первый_файл> <второй_файл> [--format stylish]
+gendiff <первый_файл> <второй_файл> [--format stylish|plain|json]
 ```
 
 Пример:
@@ -40,7 +33,7 @@ gendiff <первый_файл> <второй_файл> [--format stylish]
 gendiff gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
 ```
 
-Пример вывода (`stylish`):
+Вывод формата `stylish` (по умолчанию):
 ```
 {
   - a: 1
@@ -56,7 +49,7 @@ gendiff gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
 }
 ```
 
-Подсказка по параметрам:
+Справка:
 ```bash
 gendiff --help
 ```
@@ -69,16 +62,25 @@ from gendiff import generate_diff
 print(generate_diff('file1.json', 'file2.json', formatter='stylish'))
 ```
 
-### Разработка
+### Форматы вывода
+- `stylish`: древовидное представление с пометками добавленных/удаленных/измененных ключей.
+- `plain`: плоские текстовые сообщения «Property 'a.b' was updated…».
+- `json`: сериализованная внутренняя структура diff в JSON.
 
-Команды с `make`:
-- `make install` — создание виртуального окружения и установка зависимостей.
-- `make test` — запуск тестов.
-- `make test-coverage` — тесты с покрытием, отчёт `coverage.xml`.
-- `make lint` — проверка стиля (ruff, black --check).
-- `make format` — автоформатирование (ruff format, black).
+### Поддерживаемые входные форматы
+- JSON
+- YAML/YML
 
-Те же действия напрямую через `uv`:
+### Команды разработки
+Через `make`:
+- `make install`: установка зависимостей (через `uv`) в локальное окружение.
+- `make test`: запуск тестов (`pytest`).
+- `make test-coverage`: тесты с покрытием (формирует `coverage.xml`).
+- `make lint`: статический анализ (ruff) и проверка форматирования (black --check).
+- `make format`: автоформатирование (ruff format, black).
+- `make build`: сборка wheel‑пакета.
+
+Эквиваленты на `uv` напрямую:
 ```bash
 uv run pytest -v
 uv run pytest --cov=gendiff --cov-report=term-missing --cov-report xml
@@ -86,9 +88,13 @@ uv run ruff check gendiff
 uv run ruff format gendiff && uv run black gendiff
 ```
 
-### Детали реализации
-- Парсинг: строгий JSON; при ошибке парсинга JSON допускается резервный разбор как YAML для «нестрогих» входов (например, ключи без кавычек).
-- Вывод `stylish`: древовидный вид с пометками добавленных/удалённых/изменённых/неизменённых значений.
+### Установка/удаление CLI как инструмента uv
+```bash
+make build
+uv tool install dist/*.whl   # устанавливает скрипт `gendiff`
+uv tool uninstall hexlet-code
+```
 
-### Запись работы
+### Демозаписи
 - gendiff/recordings/gendiff_stage**.cast, где ** - номер стадии проекта
+
