@@ -8,7 +8,7 @@ CLI‑утилита для сравнения двух файлов конфи�
 
 ### Требования
 - Python 3.12+
-- Утилита `uv` (рекомендуется для изоляции и установки); при желании можно использовать стандартные `venv`/`pip`.
+- Утилита `uv`
 
 ### Установка
  - git clone git@github.com:vlrkors/python-project-50.git
@@ -102,7 +102,8 @@ uv tool uninstall hexlet-code
 
 ### Аксинема
  - asciinema rec gendiff.cast
-# Результат записи
+
+### Результат записи
 {"version": 2, "width": 168, "height": 26, "timestamp": 1756900102, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}}
 [0.012353, "o", "\u001b[?2004h\u001b]0;vlrkors@DRG-124: ~/python-project-50\u0007\u001b[01;32mvlrkors@DRG-124\u001b[00m:\u001b[01;34m~/python-project-50\u001b[00m$ "]
 [1.330241, "o", "gendiff gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json"]
