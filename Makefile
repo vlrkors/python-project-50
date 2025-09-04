@@ -45,12 +45,7 @@ check: test lint
 
 # Запуск CLI (пример с тестовыми файлами)
 gendiff:
-	uv run gendiff gendiff/tests/test_data/file1.yml gendiff/tests/test_data/file2.yml
-# 	uv run gendiff --format json gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
-#	uv run gendiff --format plain gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
-# 	uv run gendiff gendiff/tests/test_data/file1.json gendiff/tests/test_data/file2.json
-#   uv run gendiff --format json gendiff/tests/test_data/filepath1.json gendiff/tests/test_data/filepath2.json
-#   uv run gendiff --format plain gendiff/tests/test_data/filepath1.json gendiff/tests/test_data/filepath2.json
+	uv run gendiff tests/test_data/file1.yml tests/test_data/file2.yml
 
 # Установка пакета через uv tool
 package-install:
@@ -62,4 +57,4 @@ package-uninstall:
 
 # Запись демонстрации
 record:
-	asciinema rec gendiff/recordings/gendiff_stage9.cast
+	asciinema rec gendiff.cast
