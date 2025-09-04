@@ -97,4 +97,5 @@ uv tool uninstall hexlet-code
 
 ### Аксинема
 - gendiff/recordings/gendiff_stage**.cast, где ** - номер стадии проекта
-
+# Запись демонстрации
+	asciinema rec gendiff/recordings/gendiff_stage**.cast
