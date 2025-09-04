@@ -95,6 +95,6 @@ uv tool install dist/*.whl   # устанавливает скрипт `gendiff`
 uv tool uninstall hexlet-code
 ```
 
-### Демозаписи
+### Аксинема
 - gendiff/recordings/gendiff_stage**.cast, где ** - номер стадии проекта
 
