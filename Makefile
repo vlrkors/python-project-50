@@ -57,4 +57,12 @@ package-uninstall:
 
 # Запись демонстрации
 record:
-	asciinema rec gendiff.cast
+	asciinema rec gendiff_stage.cast
+
+# Просмотр демонстрации
+play:
+	asciinema play recordings/gendiff_stage3_4.cast
+
+# Просмотр демонстрации
+upload:
+	asciinema play recordings/gendiff_stage1_2.cast
