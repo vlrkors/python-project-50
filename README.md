@@ -101,4 +101,10 @@ uv tool uninstall hexlet-code
 ```
 
 ### Аксинема
- - asciinema rec gendiff.cast
+recordings/*.cast - расположение записей
+- recordings/gendiff_stage1_2.cast - запись работы команды gendiff --h
+- recordings/gendiff_stage3_4.cast - запись работы команды gendiff tests/test_data/file1.json tests/test_data/file2.json
+- recordings/gendiff_stage5_6.cast - запись работы команды gendiff tests/test_data/file1.yml tests/test_data/file2.yml
+- recordings/gendiff_stage7.cast - запись работы команды gendiff tests/test_data/filepath1.json tests/test_data/filepath2.json
+- recordings/gendiff_stage8.cast - запись работы команды gendiff --format plain tests/test_data/filepath1.json tests/test_data/filepath2.json
+- recordings/gendiff_stage9.cast - запись работы команды gendiff --format json tests/test_data/filepath1.json tests/test_data/filepath2.json
